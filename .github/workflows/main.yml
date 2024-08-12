@@ -24,19 +24,3 @@ jobs:
         run: echo "firstword=hello" >> $GITHUB_OUTPUT
       - id: step2
         run: echo "secondword=world" >> $GITHUB_OUTPUT
-Task 3: Configure calling workflow
-Configure the workflow which calls the reusable workflow as follows. (Check the filename in previous step and update the YAML below accordingly)
-name: Call a reusable workflow and use its outputs
-
-on:
-  workflow_dispatch:
-
-jobs:
-  job1:
-    uses: ./.github/workflows/reusable.yml
-
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - run: echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}
